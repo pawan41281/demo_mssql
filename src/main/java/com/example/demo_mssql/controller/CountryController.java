@@ -18,12 +18,10 @@ import com.example.demo_mssql.wrapper.ApiResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/v1/Countries")
-@SecurityRequirement(name = "bearerAuth")
 @Tag(description = "Country API", name = "Country API")
 public class CountryController {
 
