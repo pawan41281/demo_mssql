@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +22,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/v1/Countries")
 @Tag(description = "Country API", name = "Country API")
@@ -33,6 +36,7 @@ public class CountryController {
 
 	@GetMapping("")
 	@Operation(summary = "Get all countries", description = "Fetches all countries from database")
+	@PreAuthorize("hasRole('user') or hasRole('mod') or hasRole('admin')")
 	public ResponseEntity<ApiResponse<List<CountryVo>>> getCountrys() {
 		List<CountryVo> list = service.findAll();
 		Map<String, Integer> map = new HashMap<>();
@@ -44,6 +48,7 @@ public class CountryController {
 	@GetMapping("/{id}")
 	@Operation(summary = "Get country by id", 
 				description = "Fetches a country using their ID")
+	@PreAuthorize("hasRole('user') or hasRole('mod') or hasRole('admin')")
 	public ResponseEntity<ApiResponse<CountryVo>> find(
 			@Parameter(description = "ID of country to be retrieved", required = true)
 			@PathVariable Long id) {
