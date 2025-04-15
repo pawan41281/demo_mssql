@@ -20,12 +20,14 @@ import com.example.demo_mssql.wrapper.ApiResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/v1/Countries")
 @Tag(description = "Country API", name = "Country API")
+@SecurityRequirement(name = "Bearer Authentication")
 public class CountryController {
 
 	private final CountryServiceImpl service;
@@ -36,7 +38,7 @@ public class CountryController {
 
 	@GetMapping("")
 	@Operation(summary = "Get all countries", description = "Fetches all countries from database")
-	@PreAuthorize("hasRole('user') or hasRole('mod') or hasRole('admin')")
+	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	public ResponseEntity<ApiResponse<List<CountryVo>>> getCountrys() {
 		List<CountryVo> list = service.findAll();
 		Map<String, Integer> map = new HashMap<>();
@@ -48,7 +50,7 @@ public class CountryController {
 	@GetMapping("/{id}")
 	@Operation(summary = "Get country by id", 
 				description = "Fetches a country using their ID")
-	@PreAuthorize("hasRole('user') or hasRole('mod') or hasRole('admin')")
+	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<ApiResponse<CountryVo>> find(
 			@Parameter(description = "ID of country to be retrieved", required = true)
 			@PathVariable Long id) {
