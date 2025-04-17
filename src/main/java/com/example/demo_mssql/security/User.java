@@ -35,22 +35,22 @@ public class User {
 	
 	@Column(nullable = false)
 	@NotNull(message = "Invalid Name: Name is NULL")
-	@Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Please enter only string")
+	//@Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Please enter only string")
 	private String name;
 	
 	@Column(nullable = false, unique = true)
 	@NotNull(message = "Invalid Username: Username is NULL")
-	@Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Please enter only string")
+	//@Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Please enter only string")
 	private String username;
 	
 	@Column(nullable = false, unique = true)
 	@NotNull(message = "Invalid Email: Eamil is NULL")
-	@Email(message = "Invalid email")
+	//@Email(message = "Invalid email")
 	private String email;
 	
 	@Column(nullable = false)
 	@NotNull(message = "Invalid Password: Password is NULL")
-	@Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Please enter only string")
+	//@Pattern(regexp = "^[A-Za-z0-9 ]*$", message = "Please enter only string")
 	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
