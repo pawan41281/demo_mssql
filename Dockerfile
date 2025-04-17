@@ -5,4 +5,4 @@ FROM openjdk:17-jdk-slim
 COPY target/countryapi.jar countryapi.jar
 
 # Command to execute the application
-ENTRYPOINT ["java", "-jar", "countryapi.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=docker", "-jar", "countryapi.jar"]
