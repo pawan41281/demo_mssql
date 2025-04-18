@@ -19,9 +19,13 @@ public class OpenAPIConfiguration {
 
 	@Bean
 	OpenAPI defineOpenApi() {
-		Server server = new Server();
-		server.setUrl("http://localhost:8080");
-		server.setDescription("Development");
+		Server localhost = new Server();
+		localhost.setUrl("http://localhost:8080");
+		localhost.setDescription("Development");
+
+		Server vm_4_213_142_244 = new Server();
+		vm_4_213_142_244.setUrl("http://4.213.142.244:8080");
+		vm_4_213_142_244.setDescription("vm_4_213_142_244");
 
 		Contact myContact = new Contact();
 		myContact.setName("Pawan Kumar");
@@ -36,7 +40,7 @@ public class OpenAPIConfiguration {
 		
 //								.externalDocs(new ExternalDocumentation().description("SpringBoot Wiki Documentation").url("https://springboot.wiki.github.org/docs"))
 				
-		return new OpenAPI().info(information).servers(List.of(server));
+		return new OpenAPI().info(information).servers(List.of(localhost,vm_4_213_142_244));
 	}
 
 }
